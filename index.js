@@ -26,10 +26,21 @@ app.get("/api/hello", function (req, res) {
 // your second API endpoint...
 app.get("/api/:date", function (req, res) {
   const dateIn = req.params.date;
-  let date = !isNaN(dateIn) ? new Date(Number(dateIn)) : new Date(dateIn);
+  let date = dateIn && isNaN(dateIn) ? new Date(dateIn): new Date(Number(dateIn)) ;
+  if (!dateIn) {
+    date = new Date();
+  }
   if (!isValidDate(date)) {
     return res.json({ error: "Invalid Date" });
   }
+  const dateInUnixFormat = date.getTime();
+  const dateInUtcFormat = date.toUTCString();
+  res.json({ unix: dateInUnixFormat, utc: dateInUtcFormat });
+});
+
+// your second API endpoint...
+app.get("/api", function (req, res) {
+  let date = new Date();
   const dateInUnixFormat = date.getTime();
   const dateInUtcFormat = date.toUTCString();
   res.json({ unix: dateInUnixFormat, utc: dateInUtcFormat });
