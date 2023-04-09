@@ -27,9 +27,6 @@ app.get("/api/hello", function (req, res) {
 app.get("/api/:date", function (req, res) {
   const dateIn = req.params.date;
   let date = dateIn && isNaN(dateIn) ? new Date(dateIn): new Date(Number(dateIn)) ;
-  if (!dateIn) {
-    date = new Date();
-  }
   if (!isValidDate(date)) {
     return res.json({ error: "Invalid Date" });
   }
@@ -38,7 +35,7 @@ app.get("/api/:date", function (req, res) {
   res.json({ unix: dateInUnixFormat, utc: dateInUtcFormat });
 });
 
-// your second API endpoint...
+// your three API endpoint...
 app.get("/api", function (req, res) {
   let date = new Date();
   const dateInUnixFormat = date.getTime();
