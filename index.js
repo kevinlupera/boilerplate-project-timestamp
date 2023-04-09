@@ -35,8 +35,8 @@ app.get("/api/:date", function (req, res) {
   res.json({ unix: dateInUnixFormat, utc: dateInUtcFormat });
 });
 
-function isValidDate(d) {
-  return date instanceof Date && !isNaN(d);
+function isValidDate(date) {
+  return date instanceof Date && !isNaN(date);
 }
 
 // listen for requests :)
